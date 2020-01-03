@@ -1,0 +1,40 @@
+{
+    "name": "confrariaweb/laravel-user",
+    "description": "Complete user pack for laravel",
+    "keywords": [
+        "user",
+        "framework",
+        "laravel"
+    ],
+    "license": "MIT",
+    "type": "package",
+    "authors": [
+        {
+            "name": "Rafael Zingano",
+            "email": "confrariaweb@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "laravel/framework": "^6",
+        "confrariaweb/laravel-historic": "dev-master",
+        "confrariaweb/laravel-option": "dev-master",
+        "confrariaweb/laravel-select2": "dev-master",
+        "confrariaweb/laravel-vendor": "dev-master",
+        "laravelcollective/html": "^6.0",
+        "yajra/laravel-datatables": "^1.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "ConfrariaWeb\\User\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ConfrariaWeb\\User\\Providers\\UserServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev"
+}
