@@ -5,73 +5,11 @@ namespace ConfrariaWeb\User\Traits;
 trait UserTrait
 {
 
-    public function scopeCustomers()
-    {
-        return $this->whereHas('roles', function ($q) {
-            $q->where('settings->customer_role', 1);
-        });
-    }
-
-    public function scopeEmployees()
-    {
-        return $this->whereHas('roles', function ($q) {
-            $q->where('settings->employee_role', 1);
-        });
-    }
-
-    public function scopeOnlyAssociates()
-    {
-        return $this->whereHas('roles', function ($q) {
-            $q->where('name', config('erp.associated_role'));
-        });
-    }
-
-    public function scopeOnlyEmployees()
-    {
-        return $this->whereHas('roles', function ($q) {
-            $q->where('settings->employee_role', 1);
-        });
-    }
-
     public function rolePermissions()
     {
         return $this->hasManyDeep(
-            'App\Permission',
-            ['role_user', 'App\Role', 'permission_role']
-        );
-    }
-
-    public function roleSteps()
-    {
-        return $this->hasManyDeep(
-            'App\Step',
-            ['role_user', 'App\Role', 'role_step'],
-            ['user_id']
-        );
-    }
-
-    public function roleStepWhenCreatingUser()
-    {
-        return $this->hasManyDeep(
-            'App\Step',
-            ['role_user', 'App\Role', 'role_step_when_creating_user'],
-            ['user_id']
-        );
-    }
-
-    public function roleStatuses()
-    {
-        return $this->hasManyDeep(
-            'App\Status',
-            ['role_user', 'App\Role', 'role_status_user']
-        );
-    }
-
-    public function roleTasksStatuses()
-    {
-        return $this->hasManyDeep(
-            'App\Status',
-            ['role_user', 'App\Role', 'role_status_task']
+            'ConfrariaWeb\Entrust\Models\Permission',
+            ['entrust_role_user', 'ConfrariaWeb\Entrust\Models\Role', 'entrust_permission_role']
         );
     }
 
@@ -79,45 +17,14 @@ trait UserTrait
     {
         return $this->hasManyDeep(
             'App\Option',
-            ['role_user', 'App\Role', 'option_role'],
+            ['entrust_role_user', 'ConfrariaWeb\Entrust\Models\Role', 'entrust_option_role'],
             ['user_id']
         )->distinct();
     }
 
-    public function indications()
-    {
-        return $this->belongsToMany('App\UserAuth', 'user_indications', 'user_id', 'indicated_id');
-    }
-
-    public function indicator()
-    {
-        return $this->belongsToMany('App\UserAuth', 'user_indications', 'indicated_id', 'user_id');
-    }
-
-    public function dashboards()
-    {
-        return $this->hasMany('App\Dashboard');
-    }
-
-
-    public function status()
-    {
-        return $this->belongsTo('App\Status');
-    }
-
-    public function steps()
-    {
-        return $this->belongsToMany('App\Step', 'step_user', 'user_id');
-    }
-
-    public function tasks()
-    {
-        return $this->belongsToMany('App\Task', 'task_user', 'user_id');
-    }
-
     public function roles()
     {
-        return $this->belongsToMany('App\Role', 'role_user', 'user_id');
+        return $this->belongsToMany('ConfrariaWeb\Entrust\Models\Role', 'entrust_role_user', 'user_id');
     }
 
     function avatar()
@@ -138,26 +45,6 @@ trait UserTrait
     public function isAdmin()
     {
         return $this->roles->contains('name', 'admin');
-    }
-
-    public function base()
-    {
-        return $this->belongsToMany(
-            'App\UserAuth',
-            'bases',
-            'user_id',
-            'base_id'
-        );
-    }
-
-    public function baseOwner()
-    {
-        return $this->belongsToMany(
-            'App\UserAuth',
-            'bases',
-            'base_id',
-            'user_id'
-        );
     }
 
     public function routeNotificationForMail($notification)
@@ -208,11 +95,6 @@ trait UserTrait
     }
 
     public function format()
-    {
-        return collect($this->format_array());
-    }
-
-    public function format_array()
     {
         return collect([
             'id' => $this->id,

@@ -2,6 +2,9 @@
 
 namespace ConfrariaWeb\User\Providers;
 
+use ConfrariaWeb\User\Contracts\UserContract;
+use ConfrariaWeb\User\Repositories\UserRepository;
+use ConfrariaWeb\User\Services\UserService;
 use Illuminate\Support\ServiceProvider;
 
 class UserServiceProvider extends ServiceProvider
@@ -34,7 +37,7 @@ class UserServiceProvider extends ServiceProvider
 
         $this->app->bind(UserContract::class, UserRepository::class);
         $this->app->bind('UserService', function ($app) {
-            return new CUserService($app->make(UserContract::class));
+            return new UserService($app->make(UserContract::class));
         });
 
     }

@@ -17,6 +17,7 @@
     "require": {
         "php": "^7.2",
         "laravel/framework": "^6",
+        "confrariaweb/laravel-entrust": "dev-master",
         "confrariaweb/laravel-historic": "dev-master",
         "confrariaweb/laravel-option": "dev-master",
         "confrariaweb/laravel-select2": "dev-master",
