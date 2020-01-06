@@ -36,7 +36,6 @@ class UserController extends Controller
         });
         $this->data['get'] = $all;
         $this->data['roles'] = resolve('RoleService')->all();
-        dd(config('cw_user.views'));
         return view(config('cw_user.views') . $page, $this->data);
     }
     /**

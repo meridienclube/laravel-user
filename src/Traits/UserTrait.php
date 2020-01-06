@@ -5,6 +5,8 @@ namespace ConfrariaWeb\User\Traits;
 trait UserTrait
 {
 
+    use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
+
     public function rolePermissions()
     {
         return $this->hasManyDeep(
