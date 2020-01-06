@@ -36,21 +36,7 @@ class UserController extends Controller
         });
         $this->data['get'] = $all;
         $this->data['roles'] = resolve('RoleService')->all();
-        $this->data['steps'] = Auth::user()->roleSteps;
-        $this->data['employees'] = resolve('UserService')->employees()->pluck('name', 'id');
-        if ('kanban' != $page) {
-            $this->data['lastStep'] = Auth::user()->roleSteps->last();
-            foreach ($this->data['steps'] as $step) {
-                $step['associates'] = Auth::user()->onlyAssociates()->whereHas('steps', function (Builder $query) use ($step) {
-                    $query->where('steps.id', $step->id);
-                })->get();
-            }
-        }
-        if ('index' != $page) {
-            $this->data['users'] = isset($all) ?
-                resolve('UserService')->where($all)->get() :
-                resolve('UserService')->all();
-        }
+        dd(config('cw_user.views'));
         return view(config('cw_user.views') . $page, $this->data);
     }
     /**
