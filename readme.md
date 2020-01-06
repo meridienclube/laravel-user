@@ -7,6 +7,11 @@ From console use the following command:
 composer require confrariaweb/laravel-user
 ```
 
+Publish the files needed for the package.
+```php
+php artisan vendor:publish --tag=cw_user --force
+```
+
 Then create the tables with artisan migrate:
 ```php
 php artisan migrate
