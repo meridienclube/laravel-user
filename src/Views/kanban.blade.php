@@ -1,12 +1,12 @@
-@extends('layouts.metronic')
+@extends('meridien::layouts.metronic')
 @section('title', 'Kanban de Pessoas')
 @section('content')
-    @include('partials.kt_subheader', [
+    @include('meridien::partials.kt_subheader', [
       'breadcrumb' => [
         '#' => 'Lista de Pessoas'
       ],
       'buttons' => [
-        route('users.create') => [
+        route('admin.users.create') => [
           'label' => 'Nova Pessoa',
           'icon' => 'fa fa-plus'
         ]
@@ -37,7 +37,7 @@
     </div>
 @endsection
 
-@include('users.partials.kt_aside')
+@include('meridien::users.partials.kt_aside')
 
 @push('styles')
     <link href="{{ asset('assets/plugins/custom/kanban/kanban.bundle.css') }}" rel="stylesheet" type="text/css"/>
@@ -92,7 +92,7 @@
             //console.log(user_id)
             $.ajax({
                 type: 'POST',
-                url: '{{ route('users.json.kanban') }}',
+                url: '{{ route('admin.users.json.kanban') }}',
                 dataType: 'json',
                 data: {'user_id': user_id},
                 success: function (data) {
@@ -125,7 +125,7 @@
                         dropEl: function (el, target, source, sibling) {
                             var user_id = $(el).data('data-userid');
                             var step_id = target.parentElement.getAttribute('data-id');
-                            $.post("{{ route('users.update.step') }}",
+                            $.post("{{ route('admin.users.update.step') }}",
                                 {
                                     user_id: user_id,
                                     step_id: step_id
@@ -161,7 +161,7 @@
                                 e.preventDefault();
                                 var text = e.target[0].value;
 
-                                $.post("{{ route('users.update.step') }}",
+                                $.post("{{ route('admin.users.update.step') }}",
                                     {
                                         user_id: user_id,
                                         step_id: step_id

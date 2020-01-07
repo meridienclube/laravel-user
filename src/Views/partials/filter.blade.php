@@ -33,7 +33,7 @@
         <!--div class="kt-portlet__foot">
             <div class="kt-form__actions">
                 <button type="submit" class="btn btn-primary">Filtrar</button>
-                <a href="{{ route('users.index') }}" class="btn btn-secondary">Limpar</a>
+                <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Limpar</a>
             </div>
         </div-->
     </form>

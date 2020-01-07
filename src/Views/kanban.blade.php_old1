@@ -1,12 +1,12 @@
-@extends('layouts.metronic')
+@extends('meridien::layouts.metronic')
 @section('title', 'KanBan de Pessoas')
 @section('content')
-    @include('partials.kt_subheader', [
+    @include('meridien::partials.kt_subheader', [
       'breadcrumb' => [
         '#' => 'Lista de Pessoas'
       ],
       'buttons' => [
-        route('users.create') => [
+        route('admin.users.create') => [
           'label' => 'Nova Pessoa',
           'icon' => 'fa fa-plus'
         ]
@@ -23,4 +23,4 @@
 
 @endsection
 
-@include('users.partials.kt_aside')
+@include('meridien::users.partials.kt_aside')

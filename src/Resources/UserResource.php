@@ -29,9 +29,9 @@ class UserResource extends JsonResource
             $this->mergeWhen(Auth::check(), [
                 'id' => $this->id,
                 'links' => [
-                    'show' => route('users.show', $this->id),
-                    'edit' => route('users.edit', $this->id),
-                    'destroy' => route('users.destroy', $this->id)
+                    'show' => route('admin.users.show', $this->id),
+                    'edit' => route('admin.users.edit', $this->id),
+                    'destroy' => route('admin.users.destroy', $this->id)
                 ]
             ])
         ];

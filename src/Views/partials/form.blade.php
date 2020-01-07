@@ -82,7 +82,7 @@
                     <ul class="kt-nav">
                         <li class="kt-nav__separator"></li>
                         <li class="kt-nav__item">
-                            <a href="{{ route('users.show', $user->id) }} " class="kt-nav__link">
+                            <a href="{{ route('admin.users.show', $user->id) }} " class="kt-nav__link">
                                 <i class="kt-nav__link-icon flaticon-visible"></i>
                                 <span class="kt-nav__link-text">Visualizar usuário</span>
                             </a>
@@ -95,24 +95,24 @@
     <div class="kt-portlet__body">
         <div class="tab-content">
             <div class="tab-pane active" id="kt_apps_user_edit_tab_1" role="tabpanel">
-                @include('users.partials.form_profile')
+                @include('meridien::users.partials.form_profile')
             </div>
             <div class="tab-pane" id="kt_apps_user_edit_tab_contact" role="tabpanel">
-                @include('users.partials.contacts.form')
+                @include('meridien::users.partials.contacts.form')
             </div>
             <div class="tab-pane" id="kt_apps_user_edit_tab_base" role="tabpanel">
-                @include('users.partials.form_base')
+                @include('meridien::users.partials.form_base')
             </div>
             <div class="tab-pane" id="kt_apps_user_edit_tab_2" role="tabpanel">
-                @include('users.partials.form_address')
+                @include('meridien::users.partials.form_address')
             </div>
             <div class="tab-pane" id="kt_apps_user_edit_tab_3" role="tabpanel">
-                @include('users.partials.form_login')
+                @include('meridien::users.partials.form_login')
             </div>
             <div class="tab-pane" id="kt_apps_user_edit_tab_4" role="tabpanel">
-                @include('users.partials.form_settings')
+                @include('meridien::users.partials.form_settings')
             </div>
         </div>
     </div>
-    @include('partials.portlet_footer_form_actions', ['cancel' => route('users.index')])
+    @include('meridien::partials.portlet_footer_form_actions', ['cancel' => route('admin.users.index')])
 </div>

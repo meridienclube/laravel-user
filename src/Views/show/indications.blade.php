@@ -91,7 +91,7 @@
 
         </div>
     </div>
-    @include('partials.portlet_footer_form_actions', ['cancel' => route('users.index')])
+    @include('meridien::partials.portlet_footer_form_actions', ['cancel' => route('admin.users.index')])
 </div>
 {!! Form::close() !!}
 

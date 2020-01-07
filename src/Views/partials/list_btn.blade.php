@@ -1,13 +1,13 @@
 <div class="btn-group btn-group-sm float-right" role="group" aria-label="...">
     @permission('users.show')
-    <a href="{{ route('users.show', $id) }}" data-placement="bottom"
+    <a href="{{ route('admin.users.show', $id) }}" data-placement="bottom"
        class="btn btn-clean btn-icon btn-label-primary btn-icon-md "
        title="Visualizar usuário" data-toggle="kt-tooltip">
         <i class="la la-eye"></i>
     </a>
     @endpermission
     @permission('users.edit')
-    <a href="{{ route('users.edit', $id) }}" data-placement="bottom"
+    <a href="{{ route('admin.users.edit', $id) }}" data-placement="bottom"
        class="btn btn-clean btn-icon btn-label-success btn-icon-md "
        title="Editar usuário" data-toggle="kt-tooltip">
         <i class="la la-edit"></i>
@@ -23,7 +23,7 @@
         <i class="la la-remove"></i>
     </a>
     <form
-        action="{{ route('users.destroy', $id) }}"
+        action="{{ route('admin.users.destroy', $id) }}"
         method="POST" id="delete-user-{{ $id }}">
         <input type="hidden" name="_method" value="DELETE">
         @csrf

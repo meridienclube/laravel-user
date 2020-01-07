@@ -11,7 +11,7 @@
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-fit dropdown-menu-md">
                     <ul class="kt-nav">
                         <li class="kt-nav__item">
-                            <a href="{{ route('users.edit', $user->id) }} " class="kt-nav__link">
+                            <a href="{{ route('admin.users.edit', $user->id) }} " class="kt-nav__link">
                                 <i class="kt-nav__link-icon flaticon2-edit"></i>
                                 <span class="kt-nav__link-text">{{ __('users.edit') }}</span>
                             </a>
@@ -48,7 +48,7 @@
                     </div>
                     <div class="kt-widget__items">
 
-                        <a href="{{ route('users.show.page', ['id' => $user->id, 'page' => 'overview']) }}" class="kt-widget__item {{ Request::is(['users/*/overview', 'users/'. $user->id]) ? 'kt-widget__item--active' : '' }}">
+                        <a href="{{ route('admin.users.show.page', ['id' => $user->id, 'page' => 'overview']) }}" class="kt-widget__item {{ Request::is(['users/*/overview', 'users/'. $user->id]) ? 'kt-widget__item--active' : '' }}">
                             <span class="kt-widget__section">
                                 <span class="kt-widget__icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
@@ -63,7 +63,7 @@
                             </span>
                         </a>
 
-                        <a href="{{ route('users.show.page', ['id' => $user->id, 'page' => 'informations']) }}" class="kt-widget__item {{ Request::is('users/*/informations') ? 'kt-widget__item--active' : '' }}" data-toggle="kt-tooltip" title="Informações da pessoa" data-placement="right">
+                        <a href="{{ route('admin.users.show.page', ['id' => $user->id, 'page' => 'informations']) }}" class="kt-widget__item {{ Request::is('users/*/informations') ? 'kt-widget__item--active' : '' }}" data-toggle="kt-tooltip" title="Informações da pessoa" data-placement="right">
                             <span class="kt-widget__section">
                                 <span class="kt-widget__icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
@@ -78,7 +78,7 @@
                             </span>
                         </a>
 
-                        <a href="{{ route('users.show.page', ['id' => $user->id, 'page' => 'contacts']) }}" class="kt-widget__item {{ Request::is('users/*/contacts') ? 'kt-widget__item--active' : '' }}" data-toggle="kt-tooltip" title="Contatos da pessoa" data-placement="right">
+                        <a href="{{ route('admin.users.show.page', ['id' => $user->id, 'page' => 'contacts']) }}" class="kt-widget__item {{ Request::is('users/*/contacts') ? 'kt-widget__item--active' : '' }}" data-toggle="kt-tooltip" title="Contatos da pessoa" data-placement="right">
                             <span class="kt-widget__section">
                                 <span class="kt-widget__icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
@@ -93,7 +93,7 @@
                             </span>
                         </a>
 
-                        <a href="{{ route('users.show.page', ['id' => $user->id, 'page' => 'indications']) }}" class="kt-widget__item {{ Request::is('users/*/indications') ? 'kt-widget__item--active' : '' }}" data-toggle="kt-tooltip" title="indicações da pessoa" data-placement="right">
+                        <a href="{{ route('admin.users.show.page', ['id' => $user->id, 'page' => 'indications']) }}" class="kt-widget__item {{ Request::is('users/*/indications') ? 'kt-widget__item--active' : '' }}" data-toggle="kt-tooltip" title="indicações da pessoa" data-placement="right">
                             <span class="kt-widget__section">
                                 <span class="kt-widget__icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
@@ -108,7 +108,7 @@
                             </span>
                         </a>
 
-                        <a href="{{ route('users.show.page', ['id' => $user->id, 'page' => 'integrations']) }}" class="kt-widget__item {{ Request::is('users/*/integrations') ? 'kt-widget__item--active' : '' }}" data-toggle="kt-tooltip" title="Informações de Integrações" data-placement="right">
+                        <a href="{{ route('admin.users.show.page', ['id' => $user->id, 'page' => 'integrations']) }}" class="kt-widget__item {{ Request::is('users/*/integrations') ? 'kt-widget__item--active' : '' }}" data-toggle="kt-tooltip" title="Informações de Integrações" data-placement="right">
                             <span class="kt-widget__section">
                                 <span class="kt-widget__icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
@@ -125,7 +125,7 @@
                             </span>
                         </a>
 
-                        <a href="{{ route('users.show.page', ['id' => $user->id, 'page' => 'notification']) }}" class="kt-widget__item {{ Request::is('users/*/notification') ? 'kt-widget__item--active' : '' }}" data-toggle="kt-tooltip" title="Notificações" data-placement="right">
+                        <a href="{{ route('admin.users.show.page', ['id' => $user->id, 'page' => 'notification']) }}" class="kt-widget__item {{ Request::is('users/*/notification') ? 'kt-widget__item--active' : '' }}" data-toggle="kt-tooltip" title="Notificações" data-placement="right">
                             <span class="kt-widget__section">
                                 <span class="kt-widget__icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
@@ -139,7 +139,7 @@
                             </span>
                         </a>
 
-                        <a href="{{ route('users.show.page', ['id' => $user->id, 'page' => 'historic']) }}" class="kt-widget__item {{ Request::is('users/*/historic') ? 'kt-widget__item--active' : '' }}" data-toggle="kt-tooltip" title="Histórico" data-placement="right">
+                        <a href="{{ route('admin.users.show.page', ['id' => $user->id, 'page' => 'historic']) }}" class="kt-widget__item {{ Request::is('users/*/historic') ? 'kt-widget__item--active' : '' }}" data-toggle="kt-tooltip" title="Histórico" data-placement="right">
                             <span class="kt-widget__section">
                                 <span class="kt-widget__icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">

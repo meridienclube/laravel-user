@@ -40,7 +40,7 @@
 </div>
 
 <div style="display: none" id="btnsUser">
-    @include('users.partials.buttons')
+    @include('meridien::users.partials.buttons')
 </div>
 
 @push('scripts')

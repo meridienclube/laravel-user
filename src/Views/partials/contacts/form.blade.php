@@ -12,13 +12,13 @@
                 $index = 1;
             @endphp
             @foreach($user->contacts as $contact)
-                @include('users.partials.contacts.form_each', ['index' => $loop->iteration])
+                @include('meridien::users.partials.contacts.form_each', ['index' => $loop->iteration])
                 @php
                     $index++;
                 @endphp
             @endforeach
         @endif
-        @include('users.partials.contacts.form_each', ['index' => isset($index)? $index : 0, 'empty' => true])
+        @include('meridien::users.partials.contacts.form_each', ['index' => isset($index)? $index : 0, 'empty' => true])
         <div id="user_contact_fields"></div>
         <div class="row">
             <div class="col-lg-10 col-xl-10"></div>
@@ -31,7 +31,7 @@
             </div>
         </div>
     </div>
-    @includeWhen(isset($form_actions) && $form_actions, 'partials.portlet_footer_form_actions')
+    @includeWhen(isset($form_actions) && $form_actions, 'meridien::partials.portlet_footer_form_actions')
 </div>
 
 @push('scripts')

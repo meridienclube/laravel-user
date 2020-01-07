@@ -30,7 +30,7 @@
                                 <i class="la la-remove"></i>
                             </a>
                             <form
-                                action="{{ route('users.contact.destroy', ['user_id' => $user->id, 'contact_id' => $contact->id]) }}"
+                                action="{{ route('admin.users.contact.destroy', ['user_id' => $user->id, 'contact_id' => $contact->id]) }}"
                                 method="POST" id="delete-user-{{ $contact->id }}">
                                 <input type="hidden" name="_method" value="DELETE">
                                 @csrf
@@ -47,6 +47,6 @@
 
 
 {!! Form::open(['route' => ['users.contact.store', $user->id], 'class' => 'horizontal-form']) !!}
-@include('users.partials.contacts.form', ['form_actions' => $form_actions, 'formNot' => true])
+@include('meridien::users.partials.contacts.form', ['form_actions' => $form_actions, 'formNot' => true])
 {!! Form::close() !!}
 

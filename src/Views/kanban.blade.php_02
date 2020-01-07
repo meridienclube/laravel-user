@@ -1,12 +1,12 @@
-@extends('layouts.metronic')
+@extends('meridien::layouts.metronic')
 @section('title', 'Kanban de Pessoas')
 @section('content')
-  @include('partials.kt_subheader', [
+  @include('meridien::partials.kt_subheader', [
     'breadcrumb' => [
       '#' => 'Lista de Pessoas'
     ],
     'btns' => [
-      route('users.create') => [
+      route('admin.users.create') => [
         'label' => 'Nova Pessoa',
         'icon' => 'fa fa-plus'
       ]
@@ -27,7 +27,7 @@
                           <div class="kt-portlet__head">
                               <div class="kt-portlet__head-label">
                                   <h6 class="kt-portlet__head-title">
-                                      <a href="{{ route('users.show', $user->id) }}"> {{ $user->name }}</a>
+                                      <a href="{{ route('admin.users.show', $user->id) }}"> {{ $user->name }}</a>
                                   </h6>
                               </div>
                           </div>
@@ -46,7 +46,7 @@
                               @if($step->id == $lastStep->id)
                                   <div class="form-group form-group-xs row">
                                       <div class="col-12">
-                                      @includeIf('partials.modal_new_plan')
+                                      @includeIf('meridien::partials.modal_new_plan')
                                       </div>
                                   </div>
                               @endif
@@ -67,7 +67,7 @@
   </div>
 @endsection
 
-@include('users.partials.kt_aside')
+@include('meridien::users.partials.kt_aside')
 
 @push('styles')
     <link href="{{ asset('assets/vendors/jquery/jquery-ui.bundle.css') }}" rel="stylesheet" type="text/css" />
@@ -100,7 +100,7 @@
                             console.log(ui.item.parent().attr('step_id'));
                             console.log(ui.item.attr('user_id'));
 
-                            $.post("{{ route('users.update.step') }}",
+                            $.post("{{ route('admin.users.update.step') }}",
                             {
                                 user_id: ui.item.attr('user_id'),
                                 step_id: ui.item.parent().attr('step_id'),

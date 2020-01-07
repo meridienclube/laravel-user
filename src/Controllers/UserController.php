@@ -62,7 +62,7 @@ class UserController extends Controller
     {
         $user = resolve('UserService')->create($request->all());
         return redirect()
-            ->route('users.edit', $user->id)
+            ->route('admin.users.edit', $user->id)
             ->with('status', 'Cadastro criada com sucesso!');
     }
     /**
@@ -116,7 +116,7 @@ class UserController extends Controller
     {
         $user = resolve('UserService')->update($request->all(), $id);
         return redirect()
-            ->route('users.edit', $user->id)
+            ->route('admin.users.edit', $user->id)
             ->with('status', 'Pessoa editado com sucesso!');
     }
     /**
@@ -132,7 +132,7 @@ class UserController extends Controller
             return back()->withInput()->with('danger', __('users.deleted.error'));
         }
         return redirect()
-            ->route('users.index')
+            ->route('admin.users.index')
             ->with('status', __('users.deleted.name', ['name' => $user->name]));
     }
     /**
@@ -199,14 +199,14 @@ class UserController extends Controller
         <i class="la la-external-link"></i>
         </a>';
         if (auth()->user()->hasPermission('users.show')) {
-            $b .= '<a href="' . route('users.show', $item->id) . '" data-placement="bottom"
+            $b .= '<a href="' . route('admin.users.show', $item->id) . '" data-placement="bottom"
             class="btn btn-clean btn-icon btn-label-primary btn-icon-md "
             title="Visualizar usuário" data-toggle="kt-tooltip">
             <i class="la la-eye"></i>
             </a>';
         }
         if (auth()->user()->hasPermission('users.edit')) {
-            $b .= '<a href="' . route('users.edit', $item->id) . '" data-placement="bottom"
+            $b .= '<a href="' . route('admin.users.edit', $item->id) . '" data-placement="bottom"
             class="btn btn-clean btn-icon btn-label-success btn-icon-md "
             title="Editar usuário" data-toggle="kt-tooltip">
             <i class="la la-edit"></i>
@@ -222,7 +222,7 @@ class UserController extends Controller
             <i class="la la-remove"></i>
             </a>
             <form
-            action="' . route('users.destroy', $item->id) . '"
+            action="' . route('admin.users.destroy', $item->id) . '"
             method="POST" id="delete-user-{{ $user->id }}">
             <input type="hidden" name="_method" value="DELETE">
             ' . csrf_field() . '
