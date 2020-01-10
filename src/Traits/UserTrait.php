@@ -14,7 +14,15 @@ trait UserTrait
     {
         return $this->hasManyDeep(
             Config::get('cw_entrust.permission'),
-            ['entrust_role_user', Config::get('cw_entrust.role'), Config::get('cw_entrust.permission_role_table')]
+            [Config::get('cw_entrust.role_user_table'), Config::get('cw_entrust.role'), Config::get('cw_entrust.permission_role_table')]
+        );
+    }
+
+    public function roleTasksStatuses()
+    {
+        return $this->hasManyDeep(
+            'ConfrariaWeb\Task\Models\TaskStatus',
+            [Config::get('cw_entrust.role_user_table'), Config::get('cw_entrust.role'), 'role_status_task']
         );
     }
 
@@ -31,6 +39,11 @@ trait UserTrait
     public function hasPermission($permission)
     {
         return ($this->roles->contains('name', 'admin') || $this->rolePermissions->contains('name', $permission));
+    }
+
+    public function tasks()
+    {
+        return $this->belongsToMany('ConfrariaWeb\Task\Models\Task', 'task_user', 'user_id');
     }
 
     public function format()

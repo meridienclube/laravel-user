@@ -3,6 +3,7 @@ namespace ConfrariaWeb\User\Controllers;
 
 use ConfrariaWeb\User\Requests\StoreUserRequest;
 use ConfrariaWeb\User\Requests\UpdateUserRequest;
+use ConfrariaWeb\User\Resources\Select2UserResource;
 use ConfrariaWeb\User\Resources\UserResource;
 use ConfrariaWeb\User\Resources\UserSelectCollection;
 use Auth;
@@ -78,7 +79,7 @@ class UserController extends Controller
             'class' => 'btn-success',
             'attributes' => 'data-toggle=modal data-target=#modalNewPlan' . $id
         ];
-        $this->data['buttons'][route('tasks.create', ['destinated_id' => $id])] = [
+        $this->data['buttons'][route('admin.tasks.create', ['destinated_id' => $id])] = [
             'class' => 'btn-default',
             'label' => __('tasks.new')
         ];
@@ -299,7 +300,7 @@ class UserController extends Controller
     {
         $data = $request->all();
         $data['name'] = isset($data['term']['term'])? $data['term']['term'] : NULL;
-        $users = resolve('UserService')->where($data)->get();
-        return new UserSelectCollection($users);
+        $users = resolve('UserService')->where($data)->take(10)->get();
+        return Select2UserResource::collection($users);
     }
 }

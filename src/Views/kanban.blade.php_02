@@ -34,7 +34,7 @@
                           <div class="kt-portlet__body">
                               <div class="form-group form-group-xs row">
                                   <label class="col-4 col-form-label">
-                                      {!! $user->tasks()->exists()? '<a href="' . route('tasks.show', $user->tasks->first()->id) . '">' . $user->tasks->first()->type->name . '</a>' : '' !!}
+                                      {!! $user->tasks()->exists()? '<a href="' . route('admin.tasks.show', $user->tasks->first()->id) . '">' . $user->tasks->first()->type->name . '</a>' : '' !!}
                                   </label>
                                   <div class="col-8">
                                       <span class="form-control-plaintext kt-font-bolder">

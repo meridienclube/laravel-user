@@ -20,12 +20,12 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'steps' => StepResource::collection($this->steps),
-            'roles' => RoleResource::collection($this->roles),
-            'contacts' => isset($this->contacts) ? ContactResource::collection($this->contacts) : NULL,
-            'last_task' => ($this->tasks()->count() > 0) ?
-                Carbon::parse($this->tasks()->orderBy('id', 'desc')->first()['datetime'])->toDateString() :
-                NULL,
+            'steps' => $this->steps,
+            'roles' => $this->roles,
+            'contacts' => $this->contacts,
+            $this->mergeWhen(($this->tasks()->count() > 0), [
+                'last_task' => Carbon::parse($this->tasks()->orderBy('id', 'desc')->first()['datetime'])->toDateString()
+            ]),
             $this->mergeWhen(Auth::check(), [
                 'id' => $this->id,
                 'links' => [
