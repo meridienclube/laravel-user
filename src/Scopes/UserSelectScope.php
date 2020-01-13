@@ -1,6 +1,6 @@
 <?php
 
-namespace MeridienClube\Meridien\Scopes;
+namespace ConfrariaWeb\User\Scopes;
 
 use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Database\Eloquent\Model;

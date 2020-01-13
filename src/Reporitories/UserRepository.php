@@ -6,6 +6,7 @@ use App\User;
 use ConfrariaWeb\User\Contracts\UserContract;
 use ConfrariaWeb\Vendor\Traits\RepositoryTrait;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Config;
 
 class UserRepository implements UserContract
 {
@@ -21,16 +22,16 @@ class UserRepository implements UserContract
         $this->obj = $this->obj
             ->when(('roles' == $order), function ($query) use ($order, $by) {
                 return $query
-                    ->leftJoin('entrust_role_user AS orderByRoleUser', 'users.id', '=', 'orderByRoleUser.user_id')
-                    ->leftJoin('entrust_roles AS orderByRoles', 'orderByRoleUser.role_id', '=', 'orderByRoles.id')
-                    //->groupBy('orderByRoles.display_name')
+                    ->leftJoin(Config::get('cw_entrust.role_user_table') . ' AS orderByRoleUser', 'users.id', '=', 'orderByRoleUser.user_id')
+                    ->leftJoin(Config::get('cw_entrust.roles_table') . ' AS orderByRoles', 'orderByRoleUser.role_id', '=', 'orderByRoles.id')
+                    ->groupBy('orderByRoles.display_name')
                     ->orderBy('orderByRoles.display_name', $by);
             })
             ->when(('steps' == $order), function ($query) use ($order, $by) {
                 return $query
                     ->leftJoin('step_user AS orderByStepUser', 'users.id', '=', 'orderByStepUser.user_id')
                     ->leftJoin('steps AS orderBySteps', 'orderByStepUser.step_id', '=', 'orderBySteps.id')
-                    //->groupBy('orderBySteps.name')
+                    ->groupBy('orderBySteps.name')
                     ->orderBy('orderBySteps.name', $by);
             })
             ->when(in_array($order, ['name', 'email', 'cpf_cnpj']), function ($query) use ($order, $by) {
@@ -53,6 +54,7 @@ class UserRepository implements UserContract
 
     public function orWhere(array $data = [])
     {
+        $this->obj = $this->obj->addSelect('users.*');
 
         if (isset($data['roles']) && is_array($data['roles'])) {
             foreach ($data['roles'] as $role_k => $role_v) {
@@ -89,6 +91,8 @@ class UserRepository implements UserContract
 
     public function where(array $data, $take = null, $skip = false, $select = false)
     {
+        $this->obj = $this->obj->addSelect('users.*');
+
         if (isset($data['statuses']) && is_array($data['statuses'])) {
             $this->obj = $this->obj->whereIn('status_id', $data['statuses']);
         }

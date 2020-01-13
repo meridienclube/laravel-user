@@ -1,6 +1,6 @@
 <?php
 
-namespace MeridienClube\Meridien\Notifications;
+namespace ConfrariaWeb\User\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;

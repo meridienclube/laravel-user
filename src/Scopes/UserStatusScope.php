@@ -1,7 +1,7 @@
 <?php
-namespace MeridienClube\Meridien\Scopes;
+namespace ConfrariaWeb\User\Scopes;
 
-use MeridienClube\Meridien\Status;
+use ConfrariaWeb\User\Status;
 use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;

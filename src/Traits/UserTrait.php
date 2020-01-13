@@ -2,6 +2,7 @@
 
 namespace ConfrariaWeb\User\Traits;
 
+use ConfrariaWeb\File\Traits\FileTrait;
 use Illuminate\Support\Facades\Config;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
@@ -9,6 +10,7 @@ trait UserTrait
 {
 
     use HasRelationships;
+    use FileTrait;
 
     public function rolePermissions()
     {
@@ -44,6 +46,11 @@ trait UserTrait
     public function tasks()
     {
         return $this->belongsToMany('ConfrariaWeb\Task\Models\Task', 'task_user', 'user_id');
+    }
+
+    public function contacts()
+    {
+        return $this->morphMany('ConfrariaWeb\Contact\Models\Contact', 'contactable');
     }
 
     public function format()

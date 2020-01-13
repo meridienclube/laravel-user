@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'layout' => env('CW_LAYOUT', 'meridien::layouts.app'),
-    'views' => env('CW_VIEWS', 'user::'),
+    'layout' => env('CW_LAYOUT', 'layouts.app'),
+    'views' => env('CW_VIEWS', ''),
 
     'database' => [
         'cpf_cnpj' => [

@@ -1,8 +1,8 @@
 <?php
 
-namespace MeridienClube\Meridien\Scopes;
+namespace ConfrariaWeb\User\Scopes;
 
-use MeridienClube\Meridien\Role;
+use ConfrariaWeb\User\Role;
 use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
