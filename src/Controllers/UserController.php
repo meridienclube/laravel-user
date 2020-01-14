@@ -49,7 +49,7 @@ class UserController extends Controller
         //dd(Auth::user()->allowedRoles);
         $this->data['statuses'] = Auth::user()->roleStatuses->pluck('name', 'id');
         $this->data['roles'] = resolve('RoleService')->pluck();
-        $this->data['contact_types'] = resolve('UserContactTypeService')->pluck('name', 'id');
+        $this->data['contact_types'] = resolve('ContactTypeService')->pluck('name', 'id');
         $this->data['employees'] = resolve('UserService')->employees()->pluck('name', 'id');
         return view(config('cw_user.views') . '.create', $this->data);
     }
@@ -85,7 +85,7 @@ class UserController extends Controller
         ];
         $this->data['roles'] = resolve('RoleService')->pluck();
         $this->data['statuses'] = Auth::user()->roleStatuses->pluck('name', 'id');
-        $this->data['contact_types'] = resolve('UserContactTypeService')->pluck('name', 'id');
+        $this->data['contact_types'] = resolve('ContactTypeService')->pluck('name', 'id');
         $this->data['page'] = 'users.show.' . $page;
         $this->data['user'] = resolve('UserService')->find($id);
         return view(config('cw_user.views') . '.show', $this->data);
@@ -103,7 +103,7 @@ class UserController extends Controller
         $this->data['user'] = resolve('UserService')->find($id);
         $this->data['employees'] = resolve('UserService')->employees()->pluck('name', 'id');
         $this->data['users'] = resolve('UserService')->pluck();
-        $this->data['contact_types'] = resolve('UserContactTypeService')->pluck('name', 'id');
+        $this->data['contact_types'] = resolve('ContactTypeService')->pluck('name', 'id');
         return view(config('cw_user.views') . '.edit', $this->data);
     }
     /**
