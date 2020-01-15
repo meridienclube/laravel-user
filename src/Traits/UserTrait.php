@@ -14,6 +14,11 @@ trait UserTrait
     use HasRelationships;
     use FileTrait;
 
+    public function isAdmin()
+    {
+        return $this->roles->contains('name', 'admin');
+    }
+
     public function rolePermissions()
     {
         return $this->hasManyDeep(
@@ -21,15 +26,18 @@ trait UserTrait
             [Config::get('cw_entrust.role_user_table'), Config::get('cw_entrust.role'), Config::get('cw_entrust.permission_role_table')]
         );
     }
+    /*
+       public function roleTasksStatuses()
+       {
+        /*
+           return $this->hasManyDeep(
+               'ConfrariaWeb\Task\Models\TaskStatus',
+               [Config::get('cw_entrust.role_user_table'), Config::get('cw_entrust.role'), 'role_status_task']
+           );
 
-    public function roleTasksStatuses()
-    {
-        return $this->hasManyDeep(
-            'ConfrariaWeb\Task\Models\TaskStatus',
-            [Config::get('cw_entrust.role_user_table'), Config::get('cw_entrust.role'), 'role_status_task']
-        );
+
     }
-
+*/
     public function roles()
     {
         return $this->belongsToMany(Config::get('cw_entrust.role'), Config::get('cw_entrust.role_user_table'), Config::get('cw_entrust.user_foreign_key'));
