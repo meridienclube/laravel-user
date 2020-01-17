@@ -3,8 +3,14 @@
 namespace ConfrariaWeb\User\Providers;
 
 use ConfrariaWeb\User\Contracts\UserContract;
+use ConfrariaWeb\User\Contracts\UserStatusContract;
+use ConfrariaWeb\User\Contracts\UserStepContract;
 use ConfrariaWeb\User\Repositories\UserRepository;
+use ConfrariaWeb\User\Repositories\UserStatusRepository;
+use ConfrariaWeb\User\Repositories\UserStepRepository;
 use ConfrariaWeb\User\Services\UserService;
+use ConfrariaWeb\User\Services\UserStatusService;
+use ConfrariaWeb\User\Services\UserStepService;
 use Illuminate\Support\ServiceProvider;
 
 class UserServiceProvider extends ServiceProvider
@@ -24,6 +30,16 @@ class UserServiceProvider extends ServiceProvider
         $this->app->bind(UserContract::class, UserRepository::class);
         $this->app->bind('UserService', function ($app) {
             return new UserService($app->make(UserContract::class));
+        });
+
+        $this->app->bind(UserStatusContract::class, UserStatusRepository::class);
+        $this->app->bind('UserStatusService', function ($app) {
+            return new UserStatusService($app->make(UserStatusContract::class));
+        });
+
+        $this->app->bind(UserStepContract::class, UserStepRepository::class);
+        $this->app->bind('UserStepService', function ($app) {
+            return new UserStepService($app->make(UserStepContract::class));
         });
     }
 

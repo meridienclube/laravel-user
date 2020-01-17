@@ -20,6 +20,7 @@
         "confrariaweb/laravel-entrust": "dev-master",
         "confrariaweb/laravel-file": "dev-master",
         "confrariaweb/laravel-historic": "dev-master",
+        "confrariaweb/laravel-notification": "dev-master",
         "confrariaweb/laravel-option": "dev-master",
         "confrariaweb/laravel-select2": "dev-master",
         "confrariaweb/laravel-vendor": "dev-master",

@@ -3,13 +3,16 @@
 namespace ConfrariaWeb\User\Traits;
 
 use ConfrariaWeb\File\Traits\FileTrait;
+use ConfrariaWeb\Historic\Traits\HistoricTrait;
+use ConfrariaWeb\Integration\Traits\IntegrationTrait;
 use ConfrariaWeb\Option\Traits\OptionTrait;
 use Illuminate\Support\Facades\Config;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 trait UserTrait
 {
-
+    use HistoricTrait;
+    use IntegrationTrait;
     use OptionTrait;
     use HasRelationships;
     use FileTrait;
@@ -61,6 +64,16 @@ trait UserTrait
     public function contacts()
     {
         return $this->morphMany('ConfrariaWeb\Contact\Models\Contact', 'contactable');
+    }
+
+    public function status()
+    {
+        return $this->belongsTo('ConfrariaWeb\User\Models\UserStatus', 'status_id');
+    }
+
+    public function steps()
+    {
+        return $this->belongsTo('ConfrariaWeb\User\Models\StepStatus', 'step_user');
     }
 
     public function format()
