@@ -13,6 +13,15 @@ Route::middleware(['auth:api'])
                 Route::get('datatable', 'UserController@datatable')->name('datatable');
                 Route::get('select2', 'UserController@select2')->name('select2');
 
+                Route::name('status.')
+                    ->prefix('status')
+                    ->group(function () {
+
+                        Route::get('datatable', 'UserStatusController@datatable')->name('datatable');
+                        Route::get('select2', 'UserStatusController@select2')->name('select2');
+
+                    });
+
             });
 
     });

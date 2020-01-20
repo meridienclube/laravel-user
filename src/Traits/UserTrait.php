@@ -73,7 +73,7 @@ trait UserTrait
 
     public function steps()
     {
-        return $this->belongsTo('ConfrariaWeb\User\Models\StepStatus', 'step_user');
+        return $this->belongsTo('ConfrariaWeb\User\Models\UserStep', 'step_user');
     }
 
     public function format()
