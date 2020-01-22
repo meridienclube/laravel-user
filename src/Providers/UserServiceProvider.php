@@ -2,9 +2,11 @@
 
 namespace ConfrariaWeb\User\Providers;
 
+use App\User;
 use ConfrariaWeb\User\Contracts\UserContract;
 use ConfrariaWeb\User\Contracts\UserStatusContract;
 use ConfrariaWeb\User\Contracts\UserStepContract;
+use ConfrariaWeb\User\Observers\UserObserver;
 use ConfrariaWeb\User\Repositories\UserRepository;
 use ConfrariaWeb\User\Repositories\UserStatusRepository;
 use ConfrariaWeb\User\Repositories\UserStepRepository;
@@ -23,6 +25,8 @@ class UserServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../Views', 'user');
         $this->loadMigrationsFrom(__DIR__ . '/../Databases');
         $this->publishes([__DIR__ . '/../../config/cw_user.php' => config_path('cw_user.php')], 'cw_user');
+
+        User::observe(UserObserver::class);
     }
 
     public function register()

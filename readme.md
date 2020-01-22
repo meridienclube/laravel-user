@@ -17,7 +17,8 @@ Then create the tables with artisan migrate:
 php artisan migrate
 ```
 
-In the App\User class include the trait "ConfrariaWeb\User\Traits\UserTrait" in the following way:
+In the App\User class include the trait "ConfrariaWeb\User\Traits\UserTrait" in the following way;
+Also include the values in the fillable variable;
 ```php
 <?php
 namespace App;
@@ -38,7 +39,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'cpf_cnpj', 'status_id', 'settings'
     ];
 
     /**

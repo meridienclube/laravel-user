@@ -15,18 +15,12 @@ use App\Http\Controllers\Controller;
 class UserController extends Controller
 {
     protected $data;
+
     public function __construct()
     {
         $this->data = [];
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @param Request $request
-     * @param string $page
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
-     */
+
     public function index(Request $request, $page = 'index')
     {
         $all = array_filter($request->all(), function ($e) {
@@ -39,11 +33,7 @@ class UserController extends Controller
         $this->data['roles'] = resolve('RoleService')->all();
         return view(config('cw_user.views') . 'users.' . $page, $this->data);
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         //dd(Auth::user()->allowedRoles);
@@ -53,12 +43,7 @@ class UserController extends Controller
         $this->data['employees'] = resolve('UserService')->employees()->pluck('name', 'id');
         return view(config('cw_user.views') . '.create', $this->data);
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(StoreUserRequest $request)
     {
         $user = resolve('UserService')->create($request->all());
@@ -66,12 +51,7 @@ class UserController extends Controller
             ->route('admin.users.edit', $user->id)
             ->with('status', 'Cadastro criada com sucesso!');
     }
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id, $page = 'overview')
     {
         $this->data['buttons']['javascript:void(0);'] = [
@@ -90,12 +70,7 @@ class UserController extends Controller
         $this->data['user'] = resolve('UserService')->find($id);
         return view(config('cw_user.views') . '.show', $this->data);
     }
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         $this->data['statuses'] = Auth::user()->roleStatuses->pluck('name', 'id');
@@ -106,13 +81,7 @@ class UserController extends Controller
         $this->data['contact_types'] = resolve('ContactTypeService')->pluck('name', 'id');
         return view(config('cw_user.views') . '.edit', $this->data);
     }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(UpdateUserRequest $request, $id)
     {
         $user = resolve('UserService')->update($request->all(), $id);
@@ -120,12 +89,7 @@ class UserController extends Controller
             ->route('admin.users.edit', $user->id)
             ->with('status', 'Pessoa editado com sucesso!');
     }
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         $user = resolve('UserService')->destroy($id);
@@ -136,10 +100,7 @@ class UserController extends Controller
             ->route('admin.users.index')
             ->with('status', __('users.deleted.name', ['name' => $user->name]));
     }
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
+
     public function updateStep(Request $request)
     {
         $data = $request->all();
