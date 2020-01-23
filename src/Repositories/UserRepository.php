@@ -152,6 +152,13 @@ class UserRepository implements UserContract
             });
         }
 
+        if (isset($data['base'])) {
+            $this->obj = $this->join('bases', function ($join) use ($data) {
+                $join->on('users.id', '=', 'bases.base_id')
+                    ->where('bases.user_id', $data['base']);
+            });
+        }
+
         $this->obj = $this->obj->groupBy('users.id');
 
         return $this;
