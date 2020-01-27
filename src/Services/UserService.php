@@ -19,7 +19,7 @@ class UserService
 
     function pluck($field = 'name', $key = 'id')
     {
-        return $this->obj->all()->pluck($field, $key);
+        return $this->obj->pluck($field, $key);
     }
 
     public function prepareData($data)
