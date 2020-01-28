@@ -76,6 +76,25 @@ trait UserTrait
         return $this->belongsTo('ConfrariaWeb\User\Models\UserStep', 'step_user');
     }
 
+    function avatar()
+    {
+        return ($this->files()->count() > 0) ? $this->files()->orderBy('created_at', 'desc')->first()->url : $this->get_gravatar();
+    }
+
+    function get_gravatar($email = null, $s = 80, $d = 'mp', $r = 'g', $img = false, $atts = array())
+    {
+        $url = 'https://www.gravatar.com/avatar/';
+        $url .= md5(strtolower(trim(isset($email) ? $email : $this->email)));
+        $url .= "?s=$s&d=$d&r=$r";
+        if ($img) {
+            $url = '<img src="' . $url . '"';
+            foreach ($atts as $key => $val)
+                $url .= ' ' . $key . '="' . $val . '"';
+            $url .= ' />';
+        }
+        return $url;
+    }
+
     public function format()
     {
         return collect([
