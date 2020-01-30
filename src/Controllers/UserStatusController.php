@@ -4,7 +4,7 @@ namespace ConfrariaWeb\User\Controllers;
 use ConfrariaWeb\User\Requests\StoreUserRequest;
 use ConfrariaWeb\User\Requests\UpdateUserRequest;
 use ConfrariaWeb\User\Resources\Select2UserResource;
-use ConfrariaWeb\User\Resources\Select2UserStatusResource;
+use ConfrariaWeb\User\Resources\Select2RoleResource;
 use ConfrariaWeb\User\Resources\UserResource;
 use ConfrariaWeb\User\Resources\UserSelectCollection;
 use Auth;
@@ -95,6 +95,6 @@ class UserStatusController extends Controller
         $data = $request->all();
         $data['name'] = isset($data['term'])? $data['term'] : NULL;
         $status = resolve('UserStatusService')->where($data)->get();
-        return Select2UserStatusResource::collection($status);
+        return Select2RoleResource::collection($status);
     }
 }

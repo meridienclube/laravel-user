@@ -1,27 +1,25 @@
 <?php
-
 Route::middleware(['auth:api'])
     ->name('api.')
     ->prefix('api')
     ->group(function () {
-
         Route::name('users.')
             ->prefix('users')
             ->namespace('ConfrariaWeb\User\Controllers')
             ->group(function () {
-
                 Route::get('datatable', 'UserController@datatable')->name('datatable');
                 Route::get('select2', 'UserController@select2')->name('select2');
-
-                Route::name('status.')
-                    ->prefix('status')
+                Route::name('statuses.')
+                    ->prefix('statuses')
                     ->group(function () {
-
                         Route::get('datatable', 'UserStatusController@datatable')->name('datatable');
                         Route::get('select2', 'UserStatusController@select2')->name('select2');
-
                     });
-
+                Route::name('steps.')
+                    ->prefix('steps')
+                    ->group(function () {
+                        Route::get('datatable', 'UserStepController@datatable')->name('datatable');
+                        Route::get('select2', 'UserStepController@select2')->name('select2');
+                    });
             });
-
     });
