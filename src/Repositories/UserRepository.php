@@ -165,15 +165,7 @@ class UserRepository implements UserContract
     }
 
 
-    public function associates()
-    {
-        return $this->obj->onlyAssociates()->get();
-    }
 
-    public function employees()
-    {
-        return $this->obj->employees()->get();
-    }
 
     protected function syncWithoutDetaching($obj, $data)
     {

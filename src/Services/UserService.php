@@ -60,10 +60,7 @@ class UserService
         return $this->obj->destroyContact($user_id, $contact_id);
     }
 
-    public function employees()
-    {
-        return $this->obj->employees();
-    }
+
 
     public function fields(array $fields = [])
     {
