@@ -20,11 +20,11 @@ class UserObserver
      */
     public function saving(User $user)
     {
-        if (!app()->runningInConsole()) {
+        /*if (!app()->runningInConsole()) {
             if (isset($user->getAttributes()['password']) && !empty($user->getAttributes()['password'])) {
                 $user->setAttribute('password', Hash::make($user->getAttributes()['password']));
             }
-        }
+        }*/
     }
 
     /**

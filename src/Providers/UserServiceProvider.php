@@ -25,8 +25,6 @@ class UserServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../Views', 'user');
         $this->loadMigrationsFrom(__DIR__ . '/../Databases');
         $this->publishes([__DIR__ . '/../../config/cw_user.php' => config_path('cw_user.php')], 'cw_user');
-
-        User::observe(UserObserver::class);
     }
 
     public function register()
