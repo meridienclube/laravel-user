@@ -1,5 +1,6 @@
 {
     "name": "confrariaweb/laravel-user",
+    "version": "dev-master",
     "description": "Complete user pack for laravel",
     "keywords": [
         "user",
@@ -15,8 +16,6 @@
         }
     ],
     "require": {
-        "php": "^7.2",
-        "laravel/framework": "^6",
         "confrariaweb/laravel-entrust": "dev-master",
         "confrariaweb/laravel-file": "dev-master",
         "confrariaweb/laravel-historic": "dev-master",
@@ -24,9 +23,9 @@
         "confrariaweb/laravel-option": "dev-master",
         "confrariaweb/laravel-select2": "dev-master",
         "confrariaweb/laravel-vendor": "dev-master",
-        "laravelcollective/html": "^6.0",
-        "yajra/laravel-datatables": "^1.5",
-        "staudenmeir/eloquent-has-many-deep" : "master"
+        "laravelcollective/html": ">=6.0",
+        "yajra/laravel-datatables": "master",
+        "staudenmeir/eloquent-has-many-deep" : ">=1.11"
     },
     "autoload": {
         "psr-4": {
