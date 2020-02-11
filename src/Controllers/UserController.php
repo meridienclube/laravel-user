@@ -8,7 +8,6 @@ use ConfrariaWeb\User\Resources\UserResource;
 use ConfrariaWeb\User\Resources\UserSelectCollection;
 use Auth;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 
@@ -21,7 +20,7 @@ class UserController extends Controller
         $this->data = [];
     }
 
-    public function index(Request $request, $page = 'index')
+    public function index(Request $request)
     {
         $all = array_filter($request->all(), function ($e) {
             if (is_array($e)) {
@@ -31,7 +30,7 @@ class UserController extends Controller
         });
         $this->data['get'] = $all;
         $this->data['roles'] = resolve('RoleService')->all();
-        return view(config('cw_user.views') . 'users.' . $page, $this->data);
+        return view(config('cw_user.views') . 'users.index', $this->data);
     }
 
     public function create()

@@ -1,15 +1,9 @@
 <?php
 
-use App\Permission;
-use App\Role;
-use App\Status;
-use App\Step;
-use App\User;
-use App\Option;
-use App\UserContactType;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class UsersTableSeeder extends Seeder
@@ -27,7 +21,27 @@ class UsersTableSeeder extends Seeder
 
     private function createUsers()
     {
-
+        $statuses = ['active', 'inactive'];
+        foreach ($statuses as $status) {
+            DB::table('user_statuses')->insert([
+                'name' => $status,
+                'slug' => $status
+            ]);
+        }
+        $users = [
+            [
+                'name' => 'Rafael Zingano',
+                'email' => 'rafazingano@gmail.com',
+                'password' => 'password',
+            ]
+        ];
+        foreach ($users as $user) {
+            DB::table('users')->insert([
+                'name' => $user['name'],
+                'email' => $user['email'],
+                'password' => Hash::make($user['password']),
+            ]);
+        }
     }
 
     private function truncateUserTables()
