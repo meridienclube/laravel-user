@@ -10,13 +10,6 @@ Route::prefix('admin')
             ->name('users.')
             ->group(function () {
 
-                Route::name('steps.')
-                    ->prefix('steps')
-                    ->group(function () {
-                    Route::get('trashed', 'UserStepController@trashed')->name('trashed');
-                });
-                Route::resource('steps', 'UserStepController');
-
                 Route::name('statuses.')
                     ->prefix('statuses')
                     ->group(function () {

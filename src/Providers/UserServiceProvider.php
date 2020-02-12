@@ -3,6 +3,7 @@
 namespace ConfrariaWeb\User\Providers;
 
 use App\User;
+use ConfrariaWeb\User\Commands\CheckPackage;
 use ConfrariaWeb\User\Contracts\UserContract;
 use ConfrariaWeb\User\Contracts\UserStatusContract;
 use ConfrariaWeb\User\Contracts\UserStepContract;
@@ -18,15 +19,6 @@ use Illuminate\Support\ServiceProvider;
 class UserServiceProvider extends ServiceProvider
 {
 
-    public function boot()
-    {
-        $this->loadRoutesFrom(__DIR__ . '/../Routes/web.php');
-        $this->loadRoutesFrom(__DIR__ . '/../Routes/api.php');
-        $this->loadViewsFrom(__DIR__ . '/../Views', 'user');
-        $this->loadMigrationsFrom(__DIR__ . '/../Databases');
-        $this->publishes([__DIR__ . '/../../config/cw_user.php' => config_path('cw_user.php')], 'cw_user');
-    }
-
     public function register()
     {
         $this->app->bind(UserContract::class, UserRepository::class);
@@ -38,11 +30,24 @@ class UserServiceProvider extends ServiceProvider
         $this->app->bind('UserStatusService', function ($app) {
             return new UserStatusService($app->make(UserStatusContract::class));
         });
+    }
 
-        $this->app->bind(UserStepContract::class, UserStepRepository::class);
-        $this->app->bind('UserStepService', function ($app) {
-            return new UserStepService($app->make(UserStepContract::class));
-        });
+    public function boot()
+    {
+        $this->loadRoutesFrom(__DIR__ . '/../Routes/api.php');
+        $this->loadRoutesFrom(__DIR__ . '/../Routes/web.php');
+        $this->loadViewsFrom(__DIR__ . '/../Views', 'user');
+        $this->loadMigrationsFrom(__DIR__ . '/../Databases/Migrations');
+        $this->loadTranslationsFrom(__DIR__ . '/../Translations', 'user');
+        $this->publishes([__DIR__ . '/../../config/cw_user.php' => config_path('cw_user.php')], 'cw_user');
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                CheckPackage::class
+            ]);
+        }
+
+        User::observe(UserObserver::class);
     }
 
 }

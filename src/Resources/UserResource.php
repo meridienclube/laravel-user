@@ -1,4 +1,5 @@
 <?php
+
 namespace ConfrariaWeb\User\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -20,12 +21,8 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'steps' => $this->steps,
             'roles' => $this->roles,
-            'contacts' => $this->contacts,
-            $this->mergeWhen(($this->tasks()->count() > 0), [
-                'last_task' => Carbon::parse($this->tasks()->orderBy('id', 'desc')->first()['datetime'])->toDateString()
-            ]),
+            'status' => $this->status,
             $this->mergeWhen(Auth::check(), [
                 'id' => $this->id,
                 'links' => [

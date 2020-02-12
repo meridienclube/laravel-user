@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class UserStatus extends Model
 {
-    //use SoftDeletes;
-    use HistoricTrait;
 
     protected $table = 'user_statuses';
 

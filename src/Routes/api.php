@@ -15,11 +15,5 @@ Route::middleware(['auth:api'])
                         Route::get('datatable', 'UserStatusController@datatable')->name('datatable');
                         Route::get('select2', 'UserStatusController@select2')->name('select2');
                     });
-                Route::name('steps.')
-                    ->prefix('steps')
-                    ->group(function () {
-                        Route::get('datatable', 'UserStepController@datatable')->name('datatable');
-                        Route::get('select2', 'UserStepController@select2')->name('select2');
-                    });
             });
     });

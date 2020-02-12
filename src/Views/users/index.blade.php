@@ -1,5 +1,5 @@
 @extends(config('cw_user.layout'))
-@section('title', 'Pessoas')
+@section('title', __('user::titles.users'))
 @section('content')
     <div class="container">
         <div class="row">

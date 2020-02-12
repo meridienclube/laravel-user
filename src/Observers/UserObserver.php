@@ -3,43 +3,18 @@
 namespace ConfrariaWeb\User\Observers;
 
 use App\User;
-use Illuminate\Support\Facades\Hash;
+use ConfrariaWeb\User\Models\UserStatus;
 use Illuminate\Support\Str;
 
 class UserObserver
 {
-
-    public function Retrieved(User $user){
-        //dd($user);
-    }
-    /**
-     * Handle the user "created" event.
-     *
-     * @param \App\User $user
-     * @return void
-     */
-    public function saving(User $user)
-    {
-        /*if (!app()->runningInConsole()) {
-            if (isset($user->getAttributes()['password']) && !empty($user->getAttributes()['password'])) {
-                $user->setAttribute('password', Hash::make($user->getAttributes()['password']));
-            }
-        }*/
-    }
-
-    /**
-     * Handle the user "created" event.
-     *
-     * @param \App\User $user
-     * @return void
-     */
+    
     public function creating(User $user)
     {
-        $user->setAttribute('api_token', Str::random(60));
-
-        if (!isset($user->getAttributes()['status_id'])) {
-            $user->setAttribute('status_id', 1);
-        }
+        $token = Str::random(80);
+        $status_id = UserStatus::first()->id ?? NULL;
+        $user->setAttribute('api_token', hash('sha256', $token));
+        $user->setAttribute('status_id', $status_id);
     }
 
     /**
@@ -51,17 +26,6 @@ class UserObserver
     public function created(User $user)
     {
         //
-    }
-
-    /**
-     * Handle the user "updated" event.
-     *
-     * @param \App\User $user
-     * @return void
-     */
-    public function updating(User $user)
-    {
-
     }
 
     /**
