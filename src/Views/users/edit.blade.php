@@ -1,26 +1,13 @@
-@extends('meridien::layouts.metronic')
-@section('title', 'Pessoas')
+@extends(config('cw_user.layout'))
+@section('title', __('user::views.users'))
 @section('content')
-
-    @include('meridien::partials.kt_subheader', [
-      'breadcrumb' => [
-        route('admin.users.index') => 'Lista de Pessoas',
-        '#' => 'Editar Pessoa'
-      ],
-      'buttons' => [
-        route('admin.users.index') => [
-          'label' => __('return'),
-          'icon' => 'flaticon2-back'
-        ]
-      ]
-    ])
-
-    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
-        {!! Form::model($user, ['route' => ['users.update', $user->id], 'files' => true, 'method' => 'put', 'class' => 'horizontal-form']) !!}
-        @include('meridien::users.partials.form')
-        {!! Form::close() !!}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                {!! Form::model($user, ['route' => ['admin.users.update', $user->id], 'files' => true, 'method' => 'put', 'class' => 'horizontal-form']) !!}
+                @include('user::users.partials.form')
+                {!! Form::close() !!}
+            </div>
+        </div>
     </div>
-
 @endsection
-
-@include('meridien::users.partials.kt_aside')

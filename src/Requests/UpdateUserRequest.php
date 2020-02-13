@@ -1,12 +1,11 @@
 <?php
 namespace ConfrariaWeb\User\Requests;
 
-use ConfrariaWeb\User\Rules\JustFull;
-use ConfrariaWeb\User\Rules\NullAndUnique;
-use ConfrariaWeb\User\Rules\OldDifferentPassword;
 use App\User;
+use ConfrariaWeb\User\Rules\OldDifferentPassword;
+use ConfrariaWeb\User\Rules\UserPasswordUpdate;
+use ConfrariaWeb\Vendor\Rules\JustFull;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -27,10 +26,12 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'sometimes|required',
+            'name' => 'required',
+            'status_id' => 'required|integer',
+            'sync.roles' => 'required',
             'email' => [
-                'sometimes',
-                //Rule::unique('users')->ignore($this->user),
+                'required',
+                'email',
                 new JustFull,
                 function ($attribute, $value, $fail) {
                     if (!is_null($value) && !empty($value) && User::where($attribute, $value)->whereNotIn('id', [$this->user])->exists()) {
@@ -38,24 +39,8 @@ class UpdateUserRequest extends FormRequest
                     }
                 },
             ],
-            'cpf_cnpj' => [
-                'sometimes',
-                //Rule::unique('users')->ignore($this->user)->ignore(NULL, 'cpf_cnpj'),
-                new JustFull,
-                function ($attribute, $value, $fail) {
-                    if (!is_null($value) && !empty($value) && User::where($attribute, $value)->whereNotIn('id', [$this->user])->exists()) {
-                        $fail($attribute.' already exists.');
-                    }
-                },
-            ],
-            'sync.roles.*' => 'sometimes|required',
-            'status_id' => 'sometimes|required',
-            'password_current' => 'sometimes|required_with:password|nullable',
             'password' => [
-                'sometimes',
-                'confirmed',
-                'nullable',
-                new OldDifferentPassword,
+                new UserPasswordUpdate()
             ],
         ];
     }
@@ -66,11 +51,6 @@ class UpdateUserRequest extends FormRequest
      */
     public function messages()
     {
-        return [
-            'name.required' => 'O Nome é necessário para editar um registro',
-            'email.required' => 'O Email é necessário para editar um registro',
-            'sync.roles.*.required' => 'O Perfil é necessário para editar um registro',
-            'status_id.required' => 'O status é necessário para editar um registro',
-        ];
+        return config('cw_user.request.messages')?? [];
     }
 }

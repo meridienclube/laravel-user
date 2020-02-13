@@ -24,8 +24,6 @@ class UserRepository implements UserContract
                 return $query
                     ->leftJoin(Config::get('cw_entrust.role_user_table') . ' AS orderByRoleUser', 'users.id', '=', 'orderByRoleUser.user_id')
                     ->leftJoin(Config::get('cw_entrust.roles_table') . ' AS orderByRoles', 'orderByRoleUser.role_id', '=', 'orderByRoles.id');
-                    //->groupBy('orderByRoles.display_name')
-                    //->orderBy('orderByRoles.display_name', $by);
             })
             ->when(in_array($order, ['name', 'email', 'id']), function ($query) use ($order, $by) {
                 return $query->orderBy($order, $by);
@@ -148,18 +146,6 @@ class UserRepository implements UserContract
         if (isset($data['optionsValues'])) {
             $obj->optionsValues()->sync($data['optionsValues']);
         }
-
-    }
-
-    protected function SyncAllBelongsTo($obj, $relation, $data)
-    {
-        $dataChecked = array_filter(array_map(function ($item) {
-            if ($item['value']) {
-                return $item;
-            }
-        }, $data));
-        $obj->{$relation}()->delete();
-        $obj->{$relation}()->createMany($dataChecked);
 
     }
 

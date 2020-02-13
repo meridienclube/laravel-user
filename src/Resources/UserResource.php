@@ -21,8 +21,8 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'roles' => $this->roles,
-            'status' => $this->status,
+            'roles' => $this->roles?? [],
+            'status' => $this->status?? [],
             $this->mergeWhen(Auth::check(), [
                 'id' => $this->id,
                 'links' => [

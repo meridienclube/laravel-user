@@ -3,6 +3,7 @@
 namespace ConfrariaWeb\User\Providers;
 
 use App\User;
+use Collective\Html\FormFacade as Form;
 use ConfrariaWeb\User\Commands\CheckPackage;
 use ConfrariaWeb\User\Contracts\UserContract;
 use ConfrariaWeb\User\Contracts\UserStatusContract;
@@ -46,6 +47,8 @@ class UserServiceProvider extends ServiceProvider
                 CheckPackage::class
             ]);
         }
+
+        Form::component('selectUser', 'user::components.form.select_user', ['name', 'value' => null, 'attributes' => ['class' => 'form-control'], 'route' => NULL]);
 
         User::observe(UserObserver::class);
     }

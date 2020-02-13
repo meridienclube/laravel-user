@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Rules;
+namespace ConfrariaWeb\User\Rules;
 
 use App\User;
 use Illuminate\Contracts\Validation\Rule;

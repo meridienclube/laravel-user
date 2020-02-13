@@ -6,10 +6,7 @@ use ConfrariaWeb\User\Requests\StoreUserRequest;
 use ConfrariaWeb\User\Requests\UpdateUserRequest;
 use ConfrariaWeb\User\Resources\Select2UserResource;
 use ConfrariaWeb\User\Resources\UserResource;
-use ConfrariaWeb\User\Resources\UserSelectCollection;
-use Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 
 class UserController extends Controller
@@ -19,6 +16,8 @@ class UserController extends Controller
     public function __construct()
     {
         $this->data = [];
+        $this->data['statuses'] = resolve('UserStatusService')->pluck();
+        $this->data['roles'] = resolve('RoleService')->pluck();
     }
 
     public function datatable(Request $request)
@@ -49,25 +48,19 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $all = array_filter($request->all(), function ($e) {
+        $this->data['get'] = array_filter($request->all(), function ($e) {
             if (is_array($e)) {
                 return array_filter($e);
             }
             return $e;
         });
-        $this->data['get'] = $all;
         $this->data['roles'] = resolve('RoleService')->all();
         return view(config('cw_user.views') . 'users.index', $this->data);
     }
 
     public function create()
     {
-        //dd(Auth::user()->allowedRoles);
-        $this->data['statuses'] = Auth::user()->roleStatuses->pluck('name', 'id');
-        $this->data['roles'] = resolve('RoleService')->pluck();
-        $this->data['contact_types'] = resolve('ContactTypeService')->pluck('name', 'id');
-        $this->data['employees'] = resolve('UserService')->employees()->pluck('name', 'id');
-        return view(config('cw_user.views') . '.create', $this->data);
+        return view(config('cw_user.views') . 'users.create', $this->data);
     }
 
     public function store(StoreUserRequest $request)
@@ -75,37 +68,19 @@ class UserController extends Controller
         $user = resolve('UserService')->create($request->all());
         return redirect()
             ->route('admin.users.edit', $user->id)
-            ->with('status', 'Cadastro criada com sucesso!');
+            ->with('status', 'Cadastro criado com sucesso!');
     }
 
     public function show($id, $page = 'overview')
     {
-        $this->data['buttons']['javascript:void(0);'] = [
-            'label' => __('plan.new'),
-            'class' => 'btn-success',
-            'attributes' => 'data-toggle=modal data-target=#modalNewPlan' . $id
-        ];
-        $this->data['buttons'][route('admin.tasks.create', ['destinated_id' => $id])] = [
-            'class' => 'btn-default',
-            'label' => __('tasks.new')
-        ];
-        $this->data['roles'] = resolve('RoleService')->pluck();
-        $this->data['statuses'] = Auth::user()->roleStatuses->pluck('name', 'id');
-        $this->data['contact_types'] = resolve('ContactTypeService')->pluck('name', 'id');
-        $this->data['page'] = 'users.show.' . $page;
         $this->data['user'] = resolve('UserService')->find($id);
-        return view(config('cw_user.views') . '.show', $this->data);
+        return view(config('cw_user.views') . 'users.show', $this->data);
     }
 
     public function edit($id)
     {
-        $this->data['statuses'] = Auth::user()->roleStatuses->pluck('name', 'id');
-        $this->data['roles'] = resolve('RoleService')->pluck();
         $this->data['user'] = resolve('UserService')->find($id);
-        $this->data['employees'] = resolve('UserService')->employees()->pluck('name', 'id');
-        $this->data['users'] = resolve('UserService')->pluck();
-        $this->data['contact_types'] = resolve('ContactTypeService')->pluck('name', 'id');
-        return view(config('cw_user.views') . '.edit', $this->data);
+        return view(config('cw_user.views') . 'users.edit', $this->data);
     }
 
     public function update(UpdateUserRequest $request, $id)
@@ -113,18 +88,18 @@ class UserController extends Controller
         $user = resolve('UserService')->update($request->all(), $id);
         return redirect()
             ->route('admin.users.edit', $user->id)
-            ->with('status', 'Pessoa editado com sucesso!');
+            ->with('status', 'Usuário editado com sucesso!');
     }
 
     public function destroy($id)
     {
         $user = resolve('UserService')->destroy($id);
         if (!$user) {
-            return back()->withInput()->with('danger', __('users.deleted.error'));
+            return back()->withInput()->with('danger', 'Usuário não encontrado');
         }
         return redirect()
             ->route('admin.users.index')
-            ->with('status', __('users.deleted.name', ['name' => $user->name]));
+            ->with('status', 'Usuário deletado com sucesso');
     }
 
 }

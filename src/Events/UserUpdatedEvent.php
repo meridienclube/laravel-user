@@ -30,6 +30,7 @@ class UserUpdatedEvent
      */
     public function __construct($user)
     {
+
         $this->obj = $user;
         $this->historic = new UserUpdatedHistoric($user);
         $this->when = 'updated';
@@ -37,7 +38,7 @@ class UserUpdatedEvent
         if (Auth::check()) {
             $this->users[Auth::id()] = Auth::user();
         }
-        $this->notification = new UserUpdatedNotification();
+        //$this->notification = new UserUpdatedNotification();
     }
 
     /**
