@@ -18,13 +18,13 @@ class UserCreatedHistoric implements HistoricContract
     {
         return [
             'action' => 'created',
-            'content' => 'Pessoa ' . $this->user->name . ' criada com sucesso'
+            'content' => __('user::listener.user.content.created', ['name' => $this->user->name])
         ];
     }
 
     public function title()
     {
-        return 'Pessoa criada';
+        return __('user::listener.user.created');
     }
 
     public function user($collunn = null)

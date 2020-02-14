@@ -2,9 +2,12 @@
 
 namespace ConfrariaWeb\User\Providers;
 
-use ConfrariaWeb\File\Listeners\UploadFile;
+use ConfrariaWeb\File\Listeners\UploadFileListener;
 use ConfrariaWeb\User\Events\UserCreatedEvent;
+use ConfrariaWeb\User\Events\UserCreatingEvent;
+use ConfrariaWeb\User\Events\UserDeletedEvent;
 use ConfrariaWeb\User\Events\UserUpdatedEvent;
+use ConfrariaWeb\User\Listeners\CreatedHistoricUserListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -14,9 +17,17 @@ class UserEventServiceProvider extends ServiceProvider
 {
 
     protected $listen = [
-
-        'ConfrariaWeb\User\Events\UserUpdatedEvent' => [
-            'ConfrariaWeb\File\Listeners\UploadFile',
+        UserCreatedEvent::class => [
+            UploadFileListener::class,
+            CreatedHistoricUserListener::class,
+        ],
+        UserUpdatedEvent::class => [
+            UploadFileListener::class,
+            CreatedHistoricUserListener::class,
+        ],
+        UserDeletedEvent::class => [
+            UploadFileListener::class,
+            CreatedHistoricUserListener::class,
         ],
     ];
 

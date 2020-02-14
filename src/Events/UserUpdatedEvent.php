@@ -18,27 +18,20 @@ class UserUpdatedEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $changes;
     public $obj;
-    public $notification;
-    public $when;
-    public $historic;
+    public $wasRecentlyCreated;
 
     /**
      * Create a new event instance.
      *
      * @param User $user
      */
-    public function __construct($user)
+    public function __construct(User $user)
     {
-
+        $this->changes = $user->changes;
         $this->obj = $user;
-        $this->historic = new UserUpdatedHistoric($user);
-        $this->when = 'updated';
-        $this->users[$user->id] = $user;
-        if (Auth::check()) {
-            $this->users[Auth::id()] = Auth::user();
-        }
-        //$this->notification = new UserUpdatedNotification();
+        $this->wasRecentlyCreated = $user->wasRecentlyCreated;
     }
 
     /**

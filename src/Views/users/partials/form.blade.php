@@ -38,7 +38,7 @@
     <div class="col-4">
         <div class="form-group">
             <label class="form-label">{{ __('user::views.avatar') }}</label>
-            {!! Form::file('avatar', ['class' => 'form-control']) !!}
+            {!! Form::file('file[avatars]', ['class' => 'form-control']) !!}
         </div>
     </div>
 

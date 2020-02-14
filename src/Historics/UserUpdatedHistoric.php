@@ -17,13 +17,13 @@ class UserUpdatedHistoric implements HistoricContract
     {
         return [
             'action' => 'updated',
-            'content' => 'Pessoa ' . $this->user->name . ' atualizada com sucesso'
+            'content' => __('user::listener.user.content.updated', ['name' => $this->user->name])
         ];
     }
 
     public function title()
     {
-        return 'Pessoa atualizada';
+        return __('user::listener.user.updated');
     }
 
     public function user($collunn = null)

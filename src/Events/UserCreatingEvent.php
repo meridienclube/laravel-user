@@ -2,8 +2,6 @@
 
 namespace ConfrariaWeb\User\Events;
 
-use ConfrariaWeb\User\Historics\UserCreatedHistoric;
-use App\Notifications\UserCreatedNotification;
 use App\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
@@ -12,15 +10,12 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Illuminate\Support\Facades\Auth;
 
-class UserCreatedEvent
+class UserCreatingEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $changes;
     public $obj;
-    public $wasRecentlyCreated;
 
     /**
      * Create a new event instance.
@@ -29,9 +24,7 @@ class UserCreatedEvent
      */
     public function __construct(User $user)
     {
-        $this->changes = $user->changes;
         $this->obj = $user;
-        $this->wasRecentlyCreated = $user->wasRecentlyCreated;
     }
 
     /**

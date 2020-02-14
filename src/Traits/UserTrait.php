@@ -15,6 +15,15 @@ trait UserTrait
     use HistoricTrait;
     use OptionTrait;
 
+    public function options()
+    {
+        return $this->hasManyDeep(
+            'ConfrariaWeb\Option\Models\Option',
+            ['role_user', 'ConfrariaWeb\Entrust\Models\Role', 'option_role'],
+            ['user_id']
+        )->distinct();
+    }
+
     public function isAdmin()
     {
         return $this->roles->contains('name', 'admin');

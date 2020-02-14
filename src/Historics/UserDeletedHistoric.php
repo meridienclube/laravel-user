@@ -18,13 +18,13 @@ class UserDeletedHistoric implements HistoricContract
     {
         return [
             'action' => 'deleted',
-            'content' => 'Pessoa ' . $this->user->name . ' deletada com sucesso'
+            'content' => __('user::listener.user.content.deleted', ['name' => $this->user->name])
         ];
     }
 
     public function title()
     {
-        return 'Pessoa deletada';
+        return __('user::listener.user.deleted');
     }
 
     public function user($collunn = null)
