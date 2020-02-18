@@ -11,10 +11,9 @@ use ConfrariaWeb\User\Contracts\UserStepContract;
 use ConfrariaWeb\User\Observers\UserObserver;
 use ConfrariaWeb\User\Repositories\UserRepository;
 use ConfrariaWeb\User\Repositories\UserStatusRepository;
-use ConfrariaWeb\User\Repositories\UserStepRepository;
+use ConfrariaWeb\Crm\Repositories\StepRepository;
 use ConfrariaWeb\User\Services\UserService;
 use ConfrariaWeb\User\Services\UserStatusService;
-use ConfrariaWeb\User\Services\UserStepService;
 use Illuminate\Support\ServiceProvider;
 
 class UserServiceProvider extends ServiceProvider
