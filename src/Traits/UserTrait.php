@@ -20,13 +20,31 @@ trait UserTrait
         return $this->hasManyDeep(
             'ConfrariaWeb\Option\Models\Option',
             ['role_user', 'ConfrariaWeb\Entrust\Models\Role', 'option_role'],
-            ['user_id']
+            ['user_id', 'role_id', 'step_id'],
+            ['users.id', 'roles.id', 'crm_steps.id']
         )->distinct();
     }
 
     public function isAdmin()
     {
         return $this->roles->contains('name', 'admin');
+    }
+
+    public function steps()
+    {
+        return $this->belongsToMany('ConfrariaWeb\Crm\Models\Step', 'crm_step_user');
+    }
+
+    /*
+     * Metodo utilizado somente quando conter
+     * o pacote "confrariaweb/laravel-crm".
+     */
+    public function roleSteps()
+    {
+        return $this->hasManyDeep(
+            'ConfrariaWeb\Crm\Models\Step',
+            [Config::get('cw_entrust.role_user_table'), Config::get('cw_entrust.role'), 'crm_step_role']
+        );
     }
 
     public function roles()
