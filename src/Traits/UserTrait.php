@@ -30,12 +30,18 @@ trait UserTrait
         return $this->roles->contains('name', 'admin');
     }
 
+    /*
+     * Etapas em que o usuario se encontra no CRM
+     * Metodo utilizado somente quando conter
+     * o pacote "confrariaweb/laravel-crm".
+     */
     public function steps()
     {
         return $this->belongsToMany('ConfrariaWeb\Crm\Models\Step', 'crm_step_user');
     }
 
     /*
+     * Etapas vinculadas aos perfis do usuario
      * Metodo utilizado somente quando conter
      * o pacote "confrariaweb/laravel-crm".
      */
@@ -73,6 +79,48 @@ trait UserTrait
     public function status()
     {
         return $this->belongsTo('ConfrariaWeb\User\Models\UserStatus', 'status_id');
+    }
+
+    /**
+     * Lista todos os indicados do usuário
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function indications()
+    {
+        return $this->belongsToMany('App\User', 'user_indications', 'user_id', 'indicated_id');
+    }
+
+    /**
+     * Lista o usuario indicador, lista quem indicou
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function indicator()
+    {
+        return $this->belongsToMany('App\User', 'user_indications', 'indicated_id', 'user_id');
+    }
+
+    /*
+     * Metodo utilizado em conjunto ao pacote "confrariaweb/laravel-task"
+     */
+    public function responsibleTasks()
+    {
+        return $this->belongsToMany('ConfrariaWeb\Task\Models\Task', 'task_responsible');
+    }
+
+    /*
+     * Metodo utilizado em conjunto ao pacote "confrariaweb/laravel-task"
+     */
+    public function destinatedTasks()
+    {
+        return $this->belongsToMany('ConfrariaWeb\Task\Models\Task', 'task_destinated');
+    }
+
+    /*
+     * Metodo utilizado em conjunto ao pacote "confrariaweb/laravel-task"
+     */
+    public function tasks()
+    {
+        return $this->hasMany('ConfrariaWeb\Task\Models\Task');
     }
 
     function avatar()
