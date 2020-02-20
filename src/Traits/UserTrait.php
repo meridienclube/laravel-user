@@ -123,6 +123,15 @@ trait UserTrait
         return $this->hasMany('ConfrariaWeb\Task\Models\Task');
     }
 
+    /**
+     * Metodo utilizado em conjunto com o pacote de dashboard "confrariaweb/laravel-dashboard"
+     * @return mixed
+     */
+    public function dashboards()
+    {
+        return $this->hasMany('ConfrariaWeb\Dashboard\Models\Dashboard');
+    }
+
     function avatar()
     {
         return ($this->files()->count() > 0) ? $this->files()->orderBy('created_at', 'desc')->first()->url : $this->get_gravatar();
