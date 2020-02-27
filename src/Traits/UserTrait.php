@@ -2,6 +2,7 @@
 
 namespace ConfrariaWeb\User\Traits;
 
+use ConfrariaWeb\Contact\Traits\ContactTrait;
 use ConfrariaWeb\File\Traits\FileTrait;
 use ConfrariaWeb\Historic\Traits\HistoricTrait;
 use ConfrariaWeb\Option\Traits\OptionTrait;
@@ -10,6 +11,7 @@ use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 trait UserTrait
 {
+    use ContactTrait;
     use FileTrait;
     use HasRelationships;
     use HistoricTrait;
