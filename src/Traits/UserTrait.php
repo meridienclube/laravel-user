@@ -21,9 +21,21 @@ trait UserTrait
     {
         return $this->hasManyDeep(
             'ConfrariaWeb\Option\Models\Option',
-            ['role_user', 'ConfrariaWeb\Entrust\Models\Role', 'option_role'],
-            ['user_id', 'role_id', 'step_id'],
-            ['users.id', 'roles.id', 'crm_steps.id']
+            [
+                Config::get('cw_entrust.role_user_table'),
+                'ConfrariaWeb\Entrust\Models\Role',
+                'option_role'
+            ], // Intermediate models and tables, beginning at the far parent (User).
+            [
+                'user_id', // Foreign key on the "role_user" table.
+                'id',      // Foreign key on the "roles" table (local key).
+                'role_id'  // Foreign key on the "options" table.
+            ],
+            [
+                'id',      // Local key on the "users" table.
+                'role_id', // Local key on the "role_user" table (foreign key).
+                'id'       // Local key on the "roles" table.
+            ]
         )->distinct();
     }
 
