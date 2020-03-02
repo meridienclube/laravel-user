@@ -5,6 +5,7 @@ namespace ConfrariaWeb\User\Traits;
 use ConfrariaWeb\Contact\Traits\ContactTrait;
 use ConfrariaWeb\File\Traits\FileTrait;
 use ConfrariaWeb\Historic\Traits\HistoricTrait;
+use ConfrariaWeb\Integration\Traits\IntegrationTrait;
 use ConfrariaWeb\Option\Traits\OptionTrait;
 use Illuminate\Support\Facades\Config;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
@@ -15,6 +16,7 @@ trait UserTrait
     use FileTrait;
     use HasRelationships;
     use HistoricTrait;
+    use IntegrationTrait;
     use OptionTrait;
 
     public function options()
