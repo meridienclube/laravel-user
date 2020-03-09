@@ -66,7 +66,7 @@ trait UserTrait
         return $this->hasManyDeep(
             'ConfrariaWeb\Crm\Models\Step',
             [Config::get('cw_entrust.role_user_table'), Config::get('cw_entrust.role'), 'crm_role_step']
-        );
+        )->distinct();
     }
 
     public function roles()
