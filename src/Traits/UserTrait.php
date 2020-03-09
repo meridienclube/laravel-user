@@ -2,12 +2,16 @@
 
 namespace ConfrariaWeb\User\Traits;
 
+use Carbon\Carbon;
 use ConfrariaWeb\Contact\Traits\ContactTrait;
 use ConfrariaWeb\File\Traits\FileTrait;
 use ConfrariaWeb\Historic\Traits\HistoricTrait;
 use ConfrariaWeb\Integration\Traits\IntegrationTrait;
 use ConfrariaWeb\Option\Traits\OptionTrait;
+use ConfrariaWeb\Task\Models\Task;
+use ConfrariaWeb\Task\Traits\TaskTrait;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 trait UserTrait
@@ -18,6 +22,7 @@ trait UserTrait
     use HistoricTrait;
     use IntegrationTrait;
     use OptionTrait;
+    use TaskTrait;
 
     public function options()
     {
@@ -113,30 +118,6 @@ trait UserTrait
     public function indicator()
     {
         return $this->belongsToMany('App\User', 'user_indications', 'indicated_id', 'user_id');
-    }
-
-    /*
-     * Metodo utilizado em conjunto ao pacote "confrariaweb/laravel-task"
-     */
-    public function responsibleTasks()
-    {
-        return $this->belongsToMany('ConfrariaWeb\Task\Models\Task', 'task_responsible');
-    }
-
-    /*
-     * Metodo utilizado em conjunto ao pacote "confrariaweb/laravel-task"
-     */
-    public function destinatedTasks()
-    {
-        return $this->belongsToMany('ConfrariaWeb\Task\Models\Task', 'task_destinated');
-    }
-
-    /*
-     * Metodo utilizado em conjunto ao pacote "confrariaweb/laravel-task"
-     */
-    public function tasks()
-    {
-        return $this->hasMany('ConfrariaWeb\Task\Models\Task');
     }
 
     /**
