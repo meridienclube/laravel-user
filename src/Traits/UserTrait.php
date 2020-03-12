@@ -7,6 +7,7 @@ use ConfrariaWeb\Contact\Traits\ContactTrait;
 use ConfrariaWeb\File\Traits\FileTrait;
 use ConfrariaWeb\Historic\Traits\HistoricTrait;
 use ConfrariaWeb\Integration\Traits\IntegrationTrait;
+use ConfrariaWeb\Location\Traits\LocationTrait;
 use ConfrariaWeb\Option\Traits\OptionTrait;
 use ConfrariaWeb\Task\Models\Task;
 use ConfrariaWeb\Task\Traits\TaskTrait;
@@ -16,6 +17,7 @@ use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 trait UserTrait
 {
+    use LocationTrait;
     use ContactTrait;
     use FileTrait;
     use HasRelationships;
