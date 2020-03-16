@@ -17,6 +17,8 @@ Route::prefix('admin')
                 });
                 Route::resource('statuses', 'UserStatusController');
 
+                Route::post('token/generate/{id}', 'UserController@apiTokenGenerate')->name('token.generate');
+
             });
 
         Route::resource('users', 'UserController');

@@ -5,7 +5,7 @@ namespace ConfrariaWeb\User\Services;
 use ConfrariaWeb\User\Contracts\UserContract;
 use ConfrariaWeb\Vendor\Traits\ServiceTrait;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class UserService
 {
@@ -18,19 +18,18 @@ class UserService
         $this->obj = $user;
     }
 
+    public function apiTokenGenerate($id)
+    {
+        $api_token = Str::random(80);
+        $user = $this->obj->update(['api_token' => $api_token], $id);
+        return $user;
+    }
+
     public function prepareData($data)
     {
         if (isset($data['password'])) {
             $data['password'] = Hash::make($data['password']);
         }
-/*
-        if (isset($data['avatar'])) {
-            $file_name = md5(time()) . '.' . $data['avatar']->getClientOriginalExtension();
-            $path = Storage::disk('public')->putFileAs(
-                'avatars', $data['avatar'], $file_name
-            );
-        }
-*/
         return $data;
     }
 

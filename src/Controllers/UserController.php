@@ -20,6 +20,12 @@ class UserController extends Controller
         $this->data['roles'] = resolve('RoleService')->pluck();
     }
 
+    public function apiTokenGenerate($id)
+    {
+        $user = resolve('UserService')->apiTokenGenerate($id);
+        return back()->withInput()->with('status', 'Token alterado com sucesso');
+    }
+
     public function datatable(Request $request)
     {
         $data = $request->all();
