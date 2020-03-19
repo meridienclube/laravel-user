@@ -1,5 +1,5 @@
 {
-    "name": "confrariaweb/laravel-user",
+    "name": "meridienclube/laravel-user",
     "version": "dev-master",
     "description": "Complete user pack for laravel",
     "keywords": [
@@ -16,13 +16,13 @@
         }
     ],
     "require": {
-        "confrariaweb/laravel-datatable": "dev-master",
-        "confrariaweb/laravel-entrust": "dev-master",
-        "confrariaweb/laravel-file": "dev-master",
-        "confrariaweb/laravel-historic": "dev-master",
-        "confrariaweb/laravel-option": "dev-master",
-        "confrariaweb/laravel-select2": "dev-master",
-        "confrariaweb/laravel-vendor": "dev-master",
+        "meridienclube/laravel-datatable": "dev-master",
+        "meridienclube/laravel-entrust": "dev-master",
+        "meridienclube/laravel-file": "dev-master",
+        "meridienclube/laravel-historic": "dev-master",
+        "meridienclube/laravel-option": "dev-master",
+        "meridienclube/laravel-select2": "dev-master",
+        "meridienclube/laravel-vendor": "dev-master",
         "laravelcollective/html": ">=6.0",
         "staudenmeir/eloquent-has-many-deep" : ">=1.11"
     },

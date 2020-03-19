@@ -56,7 +56,7 @@ trait UserTrait
     /*
      * Etapas em que o usuario se encontra no CRM
      * Metodo utilizado somente quando conter
-     * o pacote "confrariaweb/laravel-crm".
+     * o pacote "meridienclube/laravel-crm".
      */
     public function steps()
     {
@@ -66,7 +66,7 @@ trait UserTrait
     /*
      * Etapas vinculadas aos perfis do usuario
      * Metodo utilizado somente quando conter
-     * o pacote "confrariaweb/laravel-crm".
+     * o pacote "meridienclube/laravel-crm".
      */
     public function roleSteps()
     {
@@ -123,7 +123,7 @@ trait UserTrait
     }
 
     /**
-     * Metodo utilizado em conjunto com o pacote de dashboard "confrariaweb/laravel-dashboard"
+     * Metodo utilizado em conjunto com o pacote de dashboard "meridienclube/laravel-dashboard"
      * @return mixed
      */
     public function dashboards()
